@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section id="tampilbrg">
+    <table class="table table-bordered border-primary table-striped-columns text-center">
+        <tr>
+        <tr>
+            <th colspan="6" class="table-info">
+                <h2 class="text-center">Membership List</h2>
+            </th>
+        </tr>
+
+        <p><a href="/addmem" class="btn btn-primary">Tambah Data</a></p>
+
+        {% for message in messages %}
+            {% if message %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+
+        <th>Member Code </th>
+        <th>Name </th>
+        <th>Status </th>
+        <th>Level </th>
+        <th>Bonus </th>
+        <th>Aksi</th>
+        </tr>
+
+        {% for Membership in memberships %}
+
+        <tr>
+            <th><a href="{% url 'ubah_mem' Membership.id %}">{{ Membership.kodemem }}</a></th>
+            <th>{{ Membership.nama }}</th>
+            <th>{{ Membership.status }}</th>
+            <th>{{ Membership.level_id_id }}</th>
+            <th>{{ Membership.level_id.bonus }}</th>
+            <th><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                data-bs-target="#hapus-{{ Membership.id }}">Hapus</button></th>
+        <!-- Modal -->
+        <div class="modal fade" id="hapus-{{ Membership.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Yakin akan dihapus ?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Nama Membership : {{ Membership.nama }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <a href="{% url 'hapus_mem' Membership.id %}" class="btn btn-danger">Yakin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+</section>
+{% endblock %}

@@ -14,9 +14,32 @@ class Barang(models.Model):
     nama=models.CharField(max_length=50)
     stok=models.IntegerField()
     harga=models.CharField(max_length=50)
-    link_gbr=models.CharField(max_length=150, blank=True)
+    link_gbr=models.CharField(max_length=150, blank=True, default="img/Toodlers#.jpg")
     waktu_posting=models.DateTimeField(auto_now_add=True)
     jenis_id=models.ForeignKey(Jenis, on_delete=models.CASCADE, null=True)
+
+class Level(models.Model):
+    level=models.IntegerField()
+    bonus=models.TextField()
+
+    def __str__(self):
+        return "{}. {}".format(self.level, self.bonus)
+
+class Status(models.Model):
+    status=models.TextField()
+
+    def __str__(self):
+        return self.status
+
+class Membership(models.Model):
+    kodemem=models.CharField(max_length=8)
+    nama=models.CharField(max_length=50)
+    status=models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
+    waktu_posting=models.DateTimeField(auto_now_add=True)
+    level_id=models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return "{}. {}. {}".format(self.kodemem, self.nama, self.status)
 
     def __str__(self):
         return "{}. {}. {}".format(self.kodebrg, self.nama, self.harga)
@@ -37,20 +60,3 @@ class Detailtrans(models.Model):
     
     def __str__(self):
         return "{}. {}".format(self.kodetrans, self.kodebrg)
-
-class Level(models.Model):
-    level=models.IntegerField()
-    bonus=models.CharField(max_length=50)
-
-    def __str__(self):
-        return "{}. {}".format(self.level, self.bonus)
-
-class Membership(models.Model):
-    kodemem=models.CharField(max_length=8)
-    nama=models.CharField(max_length=50)
-    status=models.CharField(max_length=10)
-    waktu_posting=models.DateTimeField(auto_now_add=True)
-    level_id=models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return "{}. {}. {}".format(self.kodemem, self.nama, self.status)

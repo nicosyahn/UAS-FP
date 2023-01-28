@@ -10,10 +10,11 @@
                         <div class="alert alert-success">{{ message }}</div>
                     {% endif %}
                 {% endfor %}
-                <form action="" method="post">
+                <h3>Ubah : {{ memberships.kodemem }}</h3>
+                <form action="{% url 'ubah_mem' memberships.id %}" method="post">
                     {% csrf_token %}
                     {{form.as_p}}
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Ubah</button>
                     <a href="/memberships" class="btn btn-danger">Kembali</a>
                 </form>
             </div>

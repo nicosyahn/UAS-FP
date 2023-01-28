@@ -26,7 +26,7 @@ class FormMembership(ModelForm):
         widgets = {
             "kodemem" : forms.TextInput({'class':'form-control'}),
             "nama" : forms.TextInput({'class':'form-control'}),
-            "status" : forms.NumberInput({'class':'form-control'}),
+            "status" : forms.Select({'class':'form-control'}),
             "level_id" : forms.Select({'class':'form-control'}),
 
         }

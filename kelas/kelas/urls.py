@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
 from django.shortcuts import render
-from dashboard.views import produk, tambah_barang, Barang_View, tambah_membership, Membership_View
+from dashboard.views import *
 
 def index(request):
     titelnya="About, Roadmaps, Details"
@@ -56,5 +56,9 @@ urlpatterns = [
     path('addbrg/', tambah_barang),
     path('items/', Barang_View),
     path('addmem/', tambah_membership),
-    path('memberships/', Membership_View)
+    path('memberships/', Membership_View),
+    path('ubahbrg/<int:id_barang>', ubah_brg, name = 'ubah_brg'),
+    path('hapusbrg/<int:id_barang>', hapus_brg, name='hapus_brg'),
+    path('ubahmem/<int:id_member>', ubah_mem, name = 'ubah_mem'),
+    path('hapusmem/<int:id_member>', hapus_mem, name='hapus_mem'),
 ]

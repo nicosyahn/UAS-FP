@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Barang, Transaksi, Detailtrans, Jenis, Membership, Level
+from .models import *
 
 class kolomBarang(admin.ModelAdmin):
     list_display=['kodebrg', 'nama', 'stok', 'harga', 'link_gbr', 'jenis_id']
@@ -12,8 +12,10 @@ class kolomBarang(admin.ModelAdmin):
 class kolomLevel(admin.ModelAdmin):
     list_display=['level', 'bonus']
     search_fields=['level']
-    list_per_page= 3
 
+class kolomStatus(admin.ModelAdmin):
+    list_display=['status']
+    search_fields=['status']
 
 class kolomMembership(admin.ModelAdmin):
     list_display=['kodemem', 'nama', 'status', 'level_id']
@@ -28,3 +30,4 @@ admin.site.register(Membership, kolomMembership)
 admin.site.register(Level, kolomLevel)
 admin.site.register(Transaksi)
 admin.site.register(Detailtrans)
+admin.site.register(Status, kolomStatus)

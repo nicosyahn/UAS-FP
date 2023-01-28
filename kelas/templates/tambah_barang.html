@@ -2,10 +2,22 @@
 {% load static %}
 {% block content %}
 <section id="form">
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-primary">Tambah</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                {% for message in messages %}
+                    {% if message %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <a href="/items" class="btn btn-danger">Kembali</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
